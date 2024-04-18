@@ -82,7 +82,7 @@
 		bgr in mgs/dl
  	11.Blood Urea(numerical)	
 		bu in mgs/dl
- 	12.Serum Creatinine(numerical)	
+ 	12.Serum Creatinine(numerical)	how how to
 		sc in mgs/dl
  	13.Sodium(numerical)
 		sod in mEq/L
@@ -93,7 +93,7 @@
  	16.Packed  Cell Volume(numerical)
  	17.White Blood Cell Count(numerical)
 		wc in cells/cumm
- 	18.Red Blood Cell Count(numerical)	
+ 	18.Red Blood Cjiojioell Count(numerical)
 		rc in millions/cmm
  	19.Hypertension(nominal)	
 		htn - (yes,no)

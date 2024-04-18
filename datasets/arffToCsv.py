@@ -4,7 +4,7 @@ import os
 # Getting all the arff files from the current directory
 files = [arff for arff in os.listdir('.') if arff.endswith(".arff")]
 
-# Function for converting arff list to csv list
+# Function for converting arff list to csv listart
 def toCsv(text):
     data = False
     header = ""
