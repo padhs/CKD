@@ -229,7 +229,7 @@
 57,80,1.015,0,0,?,normal,notpresent,notpresent,120,48,1.6,?,?,11.3,36,7200,3.8,yes,yes,no,good,no,no,ckd
 60,70,?,?,?,?,?,notpresent,notpresent,124,52,2.5,?,?,?,?,?,?,yes,no,no,good,no,no,ckd
 59,50,1.01,3,0,normal,abnormal,notpresent,notpresent,241,191,12,114,2.9,9.6,31,15700,3.8,no,yes,no,good,yes,no,ckd
-65,60,1.01,2,0,normal,abnormal,present,notpresent,192,17,1.7,130,4.3,?,?,9500,?,yes,yes,no,poor,no,no,"ckd	"
+65,60,1.01,2,0,normal,abnormal,present,notpresent,192,17,1.7,130,4.3,?,?,9500,?,yes,yes,no,poor,no,no,ckd
 60,90,?,?,?,?,?,notpresent,notpresent,269,51,2.8,138,3.7,11.5,35,?,?,yes,yes,yes,good,yes,no,ckd
 50,90,1.015,1,0,abnormal,abnormal,notpresent,notpresent,?,?,?,?,?,?,?,?,?,no,no,no,good,yes,no,ckd
 51,100,1.015,2,0,normal,normal,notpresent,present,93,20,1.6,146,4.5,?,?,?,?,no,no,no,poor,no,no,ckd
