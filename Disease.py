@@ -32,3 +32,28 @@ df['hemoglobin'] = pd.to_numeric(df['hemoglobin'], errors='coerce')
 df['packed_cell_volume'] = pd.to_numeric(df['packed_cell_volume'], errors='coerce')
 df['white_blood_cell_count'] = pd.to_numeric(df['white_blood_cell_count'], errors='coerce')
 df['red_blood_cell_count'] = pd.to_numeric(df['red_blood_cell_count'], errors='coerce')
+
+
+
+
+
+
+for column in numerical_columns:
+    random_value_imputation(column)
+
+# random value imputation for categorical columns because they have high null counts
+for column in categorical_columns:
+    if column != 'red_blood_cells' and column != 'pus_cells':
+        impute_mode(column)
+    else:
+        random_value_imputation(column)
+
+
+for column in numerical_columns:
+    df[column] = mean_imputer.fit_transform(df[column])
+
+for column in categorical_columns:
+    if column != 'red_blood_cells' and column != 'pus_cells':
+        [df[column]] = mode_imputer.fit_transform([df[column]])
+    else:
+        [df[column]] = mean_imputer.fit_transform([df[column]])

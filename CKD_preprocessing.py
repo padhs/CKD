@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import LabelEncoder
+from sklearn.impute import SimpleImputer
 
 # information about the dataset
 # df = pd.read_csv('./datasets/new_kidney_disease.csv')
@@ -67,7 +68,7 @@ print(df.isna().sum().sort_values(ascending=False))
 
 print(df[numerical_columns].isnull().sum().sort_values(ascending=False))
 print(df[categorical_columns].isnull().sum().sort_values(ascending=False))
-
+print(f"These are the numerical columns: {df[numerical_columns]}\n")
 
 # filling null values, we will use 2 methods:
 
@@ -81,35 +82,36 @@ def random_value_imputation(feature):
     df.loc[df[feature].isnull(), feature] = random_sample
 
 
-def impute_mode(feature):
-    mode = df[feature].mode()[0]
-    df[feature] = df[feature].fillna(mode)
+mean_imputer = SimpleImputer(missing_values=np.nan, strategy='mean')
+df[numerical_columns] = mean_imputer.fit_transform(df[numerical_columns])
 
-
-for column in numerical_columns:
-    random_value_imputation(column)
-
-# random value imputation for categorical columns because they have high null counts
 for column in categorical_columns:
-    if column != 'red_blood_cells' and column != 'pus_cells':
-        impute_mode(column)
-    else:
+    if column == 'red_blood_cells' and column == 'pus_cells':
         random_value_imputation(column)
+
+mode_imputer = SimpleImputer(missing_values=np.nan, strategy='most_frequent')
+df[categorical_columns] = mode_imputer.fit_transform(df[categorical_columns])
 
 # confirm all null values are filled
 print(df.isna().sum())
 
 # Feature Encoding:  (converting categorical columns to numeical columns)
 for column in categorical_columns:
-    print(f"{column} has {df[column].nunique()}categories\n")
+    print(f"{column} has {df[column].nunique()} categories\n")
 
 # every column has 2 categories--> use LabelEncoder:
-
 le = LabelEncoder()
 for column in categorical_columns:
     df[column] = le.fit_transform(df[column])
 
 print(df.head())
+print(df.info())
 # categorical values are now replaced with 0/1 values.
 
-df.to_csv('./datasets/kidney_disease_ML_ready.csv', header=True, index=False)
+# rounding off decimals
+for column in df.columns:
+    df[column] = df[column].round(2)
+
+print(df.head())
+
+df.to_csv('./datasets/kidney_disease_ready_round.csv', header=True, index=False)

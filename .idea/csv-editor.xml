@@ -24,6 +24,20 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/datasets/kidney_disease_ready.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/datasets/kidney_disease_ready_round.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/datasets/new_kidney_disease.csv">
           <value>
             <Attribute>
