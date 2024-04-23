@@ -63,6 +63,8 @@ df['diabetes_mellitus'].replace(to_replace={'\tno': 'no', '\tyes': 'yes', ' yes'
 df['coronary_artery_disease'].replace(to_replace={'\tno': 'no'}, inplace=True)
 df['class'].replace(to_replace={'ckd\t': 'ckd'}, inplace=True)
 
+df.to_csv('./datasets/chronic_kidney_disease_EDA.csv', index=False, header=True)
+
 # checking for null values
 print(df.isna().sum().sort_values(ascending=False))
 
