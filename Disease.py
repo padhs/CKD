@@ -57,3 +57,9 @@ for column in categorical_columns:
         [df[column]] = mode_imputer.fit_transform([df[column]])
     else:
         [df[column]] = mean_imputer.fit_transform([df[column]])
+
+
+
+
+
+
