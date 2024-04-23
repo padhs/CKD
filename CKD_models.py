@@ -1,6 +1,4 @@
 import warnings
-import inline
-
 warnings.filterwarnings("ignore")
 # because python tells us to standardize data first, but we don't need to for these models
 
@@ -18,10 +16,7 @@ from sklearn.tree import DecisionTreeClassifier
 from xgboost import XGBClassifier
 from catboost import CatBoostClassifier
 from lightgbm import LGBMClassifier
-import matplotlib.pyplot as plt
-import plotly.express as px
 
-plt.style.use('fivethirtyeight')
 
 df = pd.read_csv('./datasets/kidney_disease_ready_round.csv')
 
