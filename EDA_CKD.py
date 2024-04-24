@@ -6,6 +6,7 @@ import pandas as pd
 import seaborn as sns
 import plotly.express as px
 import scipy.stats
+import plotly.io as pio
 
 import matplotlib.style as style
 
@@ -32,17 +33,20 @@ for column in df.columns:
     plot_number += 1
 
 plt.tight_layout()
+plt.savefig('./datasets/figures/distribution_plot.png')
 plt.show()
 
 # heatmaps of features-->
 plt.figure(figsize=(28, 20), dpi=120)
 sns.heatmap(df.corr(), annot=True, linewidths=5, linecolor='lightgrey',)
 plt.tight_layout()
+plt.savefig('./datasets/figures/heatmap_plot.png')
 plt.show()
 
 
 def violin_plot(col):
     fig = px.violin(df, y=col, x='class', box=True, template='plotly_dark')
+    pio.write_image(fig, './datasets/fig_folder/violin_plot_' + col + '.png')
     return fig.show()
 
 
@@ -50,11 +54,13 @@ def kde_plot(col):
     grid = sns.FacetGrid(df, hue='class', aspect=2)
     grid.map(sns.kdeplot, col)
     grid.add_legend()
+    grid.savefig('./datasets/fig_folder/kde_plot_' + col + '.png')
     return plt.show()
 
 
 def scatter_plot(col1, col2):
     fig = px.scatter(df, x=col1, y=col2, color='class', template='plotly_dark')
+    pio.write_image(fig, './datasets/fig_folder/scatter_plot_' + col1 + '_' + col2 + '_' + '.png')
     return fig.show()
 
 
@@ -90,7 +96,6 @@ for feature in corr_cols:
     for feature2 in corr_cols:
         scatter_plot(feature, feature2)
 
-
 # Correlating each feature with class-->
 
 # age v class
@@ -104,7 +109,9 @@ plt.setp(g.get_legend().get_title(), fontsize='42')
 g.axes.set_title('Graph of age vs number of patients with chronic kidney disease', fontsize=50)
 g.set_xlabel('Count', fontsize=40)
 g.set_ylabel("Age", fontsize=40)
+plt.savefig('./datasets/figures/age_vs_count_count_plot.png')
 plt.show()
+
 
 age_corr = ['age', 'class']
 age_corr1 = df[age_corr]
@@ -113,7 +120,7 @@ age_corr_y.corr()
 
 sns.regplot(data=age_corr_y, x='age', y='count').set_title(
     "Correlation graph for Age v chronic kidney disease patient", fontsize=12)
-
+plt.savefig('./datasets/figures/age_vs_count_reg_plot.png')
 plt.show()
 
 # red_blood_cell v class-->
@@ -139,6 +146,7 @@ bgr_corr_y.corr()
 
 sns.regplot(data=bgr_corr_y, x='blood_glucose_random', y='count').set_title(
     "Correlation graph for blood glucose vs chronic kidney disease patient", fontsize=12)
+plt.savefig('./datasets/figures/bgr_vs_class_patient.png')
 plt.show()
 
 bgr_corr_n = bgr_corr1[bgr_corr1['class'] == 0].groupby(['blood_glucose_random']).size().reset_index(name='count')
@@ -146,6 +154,7 @@ bgr_corr_n.corr()
 
 sns.regplot(data=bgr_corr_n, x='blood_glucose_random', y='count').set_title(
     "Correlation graph for blood glucose vs healthy patient", fontsize=12)
+plt.savefig('./datasets/figures/bgr_vs_class_healthy.png')
 plt.show()
 
 # blood_urea v class-->
@@ -157,6 +166,7 @@ bu_corr_y.corr()
 
 sns.regplot(data=bu_corr_y, x='blood_urea', y='count').set_title(
     'Correlation graph for blood urea vs CKD patient', fontsize=12)
+plt.savefig('./datasets/figures/bu_vs_class_patient.png')
 plt.show()
 
 bu_corr_n = bu_corr1[bu_corr1['class'] == 0].groupby(['blood_urea']).size().reset_index(name='count')
@@ -164,6 +174,7 @@ bu_corr_n.corr()
 
 sns.regplot(data=bu_corr_n, x='blood_urea', y='count').set_title(
     'Correlation graph for blood urea vs healthy patient', fontsize=12)
+plt.savefig('./datasets/figures/bu_vs_class_healthy.png')
 plt.show()
 
 # sodium v class -->
@@ -174,6 +185,7 @@ sod_corr_y.corr()
 
 sns.regplot(data=sod_corr_y, x='sodium', y='count').set_title(
     'Correlation graph for blood sodium vs CKD patient', fontsize=12)
+plt.savefig('./datasets/figures/sod_vs_class_patient.png')
 plt.show()
 
 sod_corr_n = sod_corr1[sod_corr1['class'] == 0].groupby(['sodium']).size().reset_index(name='count')
@@ -181,6 +193,7 @@ sod_corr_n.corr()
 
 sns.regplot(data=sod_corr_n, x='sodium', y='count').set_title(
     'Correlation graph for blood sodium vs healthy patient', fontsize=12)
+plt.savefig('./datasets/figures/sod_vs_class_healthy.png')
 plt.show()
 
 # pedal edema v class-->
@@ -204,6 +217,7 @@ sc_corr_y.corr()
 
 sns.regplot(data=sc_corr_y, x='serum_creatinine', y='count').set_title(
     'Correlation graph for serum creatinine vs CKD patient', fontsize=12)
+plt.savefig('./datasets/figures/serum_creatinine_vs_class_patient.png')
 plt.show()
 
 sc_corr_n = sc_corr1[sc_corr1['class'] == 0].groupby(['serum_creatinine']).size().reset_index(name='count')
@@ -211,6 +225,7 @@ sc_corr_n.corr()
 
 sns.regplot(data=sc_corr_n, x='serum_creatinine', y='count').set_title(
     'Correlation graph for serum creatinine vs CKD patient', fontsize=12)
+plt.savefig('./datasets/figures/serum_creatinine_vs_class_healthy.png')
 plt.show()
 
 # diabetes v class-->
