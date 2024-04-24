@@ -80,8 +80,8 @@ corr_cols = (
     'red_blood_cells',
     'pus_cell',
     'sodium',
-    'red_blood_cell_count'
-    'pedal_edema'
+    'red_blood_cell_count',
+    'pedal_edema',
     'anemia')
 
 for feature in corr_cols:
@@ -111,8 +111,8 @@ age_corr1 = df[age_corr]
 age_corr_y = age_corr1[age_corr1['class'] == 1].groupby(['age']).size().reset_index(name='count')
 age_corr_y.corr()
 
-sns.regplot(data=age_corr_y, x='age', y='count').set_title("Correlation graph for Age v chronic kidney disease patient",
-                                                           fontsize=12)
+sns.regplot(data=age_corr_y, x='age', y='count').set_title(
+    "Correlation graph for Age v chronic kidney disease patient", fontsize=12)
 
 plt.show()
 
@@ -138,45 +138,49 @@ bgr_corr_y = bgr_corr1[bgr_corr1['class'] == 1].groupby(['blood_glucose_random']
 bgr_corr_y.corr()
 
 sns.regplot(data=bgr_corr_y, x='blood_glucose_random', y='count').set_title(
-    "Correlation graph for blood glucose vs chronic kidney disease patient")
+    "Correlation graph for blood glucose vs chronic kidney disease patient", fontsize=12)
 plt.show()
 
 bgr_corr_n = bgr_corr1[bgr_corr1['class'] == 0].groupby(['blood_glucose_random']).size().reset_index(name='count')
 bgr_corr_n.corr()
 
 sns.regplot(data=bgr_corr_n, x='blood_glucose_random', y='count').set_title(
-    "Correlation graph for blood glucose vs healthy patient")
+    "Correlation graph for blood glucose vs healthy patient", fontsize=12)
 plt.show()
 
 # blood_urea v class-->
 bu_corr = ['blood_urea', 'class']
 bu_corr1 = df[bu_corr]
 bu_corr1.blood_urea = df.blood_urea.round(-1)
-bu_corr_y = bu_corr1[bu_corr1['class'] == 1].groupby(['bu']).size().reset_index(name='count')
+bu_corr_y = bu_corr1[bu_corr1['class'] == 1].groupby(['blood_urea']).size().reset_index(name='count')
 bu_corr_y.corr()
 
-sns.regplot(data=bu_corr_y, x='blood_urea', y='count').set_title('Correlation graph for blood urea vs CKD patient')
+sns.regplot(data=bu_corr_y, x='blood_urea', y='count').set_title(
+    'Correlation graph for blood urea vs CKD patient', fontsize=12)
 plt.show()
 
 bu_corr_n = bu_corr1[bu_corr1['class'] == 0].groupby(['blood_urea']).size().reset_index(name='count')
 bu_corr_n.corr()
 
-sns.regplot(data=bu_corr_n, x='blood_urea', y='count').set_title('Correlation graph for blood urea vs healthy patient')
+sns.regplot(data=bu_corr_n, x='blood_urea', y='count').set_title(
+    'Correlation graph for blood urea vs healthy patient', fontsize=12)
 plt.show()
 
 # sodium v class -->
 sod_corr = ['sodium', 'class']
 sod_corr1 = df[sod_corr]
-sod_corr_y = sod_corr1[sod_corr1['class'] == 1].groupby(['sod']).size().reset_index(name='count')
+sod_corr_y = sod_corr1[sod_corr1['class'] == 1].groupby(['sodium']).size().reset_index(name='count')
 sod_corr_y.corr()
 
-sns.regplot(data=sod_corr_y, x='sodium', y='count').set_title('Correlation graph for blood sodium vs CKD patient')
+sns.regplot(data=sod_corr_y, x='sodium', y='count').set_title(
+    'Correlation graph for blood sodium vs CKD patient', fontsize=12)
 plt.show()
 
 sod_corr_n = sod_corr1[sod_corr1['class'] == 0].groupby(['sodium']).size().reset_index(name='count')
 sod_corr_n.corr()
 
-sns.regplot(data=sod_corr_n, x='sodium', y='count').set_title('Correlation graph for blood sodium vs healthy patient')
+sns.regplot(data=sod_corr_n, x='sodium', y='count').set_title(
+    'Correlation graph for blood sodium vs healthy patient', fontsize=12)
 plt.show()
 
 # pedal edema v class-->
@@ -199,14 +203,14 @@ sc_corr_y = sc_corr1[sc_corr1['class'] == 1].groupby(['serum_creatinine']).size(
 sc_corr_y.corr()
 
 sns.regplot(data=sc_corr_y, x='serum_creatinine', y='count').set_title(
-    'Correlation graph for serum creatinine vs CKD patient')
+    'Correlation graph for serum creatinine vs CKD patient', fontsize=12)
 plt.show()
 
 sc_corr_n = sc_corr1[sc_corr1['class'] == 0].groupby(['serum_creatinine']).size().reset_index(name='count')
 sc_corr_n.corr()
 
 sns.regplot(data=sc_corr_n, x='serum_creatinine', y='count').set_title(
-    'Correlation graph for serum creatinine vs CKD patient')
+    'Correlation graph for serum creatinine vs CKD patient', fontsize=12)
 plt.show()
 
 # diabetes v class-->
@@ -216,13 +220,13 @@ print(cont_diabetes)
 print(cont_diabetes_chi2_test)
 
 # coronary_artery_disease v class-->
-cont_cad = pd.crosstab(df["coronary_artery_disease"], df["classification"])
+cont_cad = pd.crosstab(df["coronary_artery_disease"], df["class"])
 cont_cad_chi2_test = scipy.stats.chi2_contingency(cont_cad)
 print(cont_cad)
 print(cont_cad_chi2_test)
 
 # hypertension v class -->
-cont_hypertension = pd.crosstab(df['hypertension'], df["classification"])
+cont_hypertension = pd.crosstab(df['hypertension'], df["class"])
 cont_hypertension_chi2_test = scipy.stats.chi2_contingency(cont_hypertension)
 print(cont_hypertension)
 print(cont_hypertension_chi2_test)
