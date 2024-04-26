@@ -4,7 +4,7 @@ warnings.filterwarnings("ignore")
 
 import pandas as pd
 from sklearn.model_selection import train_test_split, GridSearchCV
-from sklearn.metrics import confusion_matrix, accuracy_score, classification_report
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, accuracy_score, classification_report
 from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import (
@@ -16,6 +16,7 @@ from sklearn.tree import DecisionTreeClassifier
 from xgboost import XGBClassifier
 from catboost import CatBoostClassifier
 from lightgbm import LGBMClassifier
+import matplotlib.pyplot as plt
 
 
 df = pd.read_csv('./datasets/kidney_disease_ready_round.csv')
@@ -44,6 +45,8 @@ print(f"LR_training_accuracy: {LR_training_accuracy}")
 print(f"LR_test_accuracy: {LR_test_accuracy}")
 print(f"LR_confusion_matrix:\n{LR_confusion_matrix}")
 print(f"LR_classification_report:\n{LR_classification_report}")
+lr_cmd_display = ConfusionMatrixDisplay(LR_confusion_matrix).plot()
+plt.show()
 
 
 # KNN -->
@@ -57,6 +60,8 @@ print(f"KNN_training_accuracy: {KNN_training_accuracy}")
 print(f"KNN_test_accuracy: {KNN_test_accuracy}")
 print(f"KNN_confusion_matrix:\n{KNN_confusion_matrix}")
 print(f"KNN_classification_report:\n{KNN_classification_report}")
+knn_cmd_display = ConfusionMatrixDisplay(KNN_confusion_matrix).plot()
+plt.show()
 
 
 # Decision Tree Classifier -->
@@ -70,6 +75,7 @@ print(f"DTC_training_accuracy: {DTC_training_accuracy}")
 print(f"DTC_test_accuracy: {DTC_test_accuracy}")
 print(f"DTC_confusion_matrix:\n{DTC_confusion_matrix}")
 print(f"DTC_classification_report:\n{DTC_classification_report}")
+
 
 # hyperparameter tuning of DTC
 grid_param = {
@@ -94,6 +100,8 @@ print(f"DTC_training_accuracy: {DTC_training_accuracy}")
 print(f"DTC_test_accuracy: {DTC_test_accuracy}")
 print(f"DTC_confusion_matrix:\n{DTC_confusion_matrix}")
 print(f"DTC_classification_report:\n{DTC_classification_report}")
+dtc_cmd_display = ConfusionMatrixDisplay(DTC_confusion_matrix).plot()
+plt.show()
 
 
 # Random Forest Classifier -->
@@ -126,6 +134,8 @@ print(f"ADA_training_accuracy: {ADA_training_accuracy}")
 print(f"ADA_test_accuracy: {ADA_test_accuracy}")
 print(f"ADA_confusion_matrix:\n{ADA_confusion_matrix}")
 print(f"ADA_classification_report:\n{ADA_classification_report}")
+ada_cmd_display = ConfusionMatrixDisplay(ADA_confusion_matrix).plot()
+plt.show()
 
 
 # Gradient Boosting Classifier
